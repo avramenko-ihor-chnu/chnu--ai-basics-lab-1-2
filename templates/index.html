@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>lab1 Bmp Analyzer</title>
+    <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+    <link href="/static/index.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  </head>
+  <body>
+    <h1>Lab1 BPM Image Analyzer</h1>
+    <h2>Please input your image:</h2>
+    <form
+      hx-post="/image-analyze"
+      hx-target="#analyze-results"
+      hx-encoding="multipart/form-data"
+    >
+      <input
+        type="file"
+        name="file-input"
+        accept=".bmp"
+        required
+      >
+      <button type="submit">Analyze Image</button>
+    </form>
+    <div id="analyze-results"></div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    {% for row in rows%}
+    <td><img src="/sugar/{{ row.cuts }}.bmp"></td>
+    <td><details>
+        <summary>
+          ::marker
+          "Event Vector"
+        </summary>
+      </details></td>
+    {% endfor %}
+  </tr>
+</table>
