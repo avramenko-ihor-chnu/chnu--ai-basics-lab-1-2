@@ -1,4 +1,4 @@
-use image::{DynamicImage, ImageResult, Rgb, open};
+use image::{DynamicImage, ImageResult, Rgb};
 use imageproc::{self, drawing::draw_line_segment_mut};
 use std::collections::HashMap;
 
@@ -28,7 +28,7 @@ fn image_cutter(pic: &DynamicImage, number_of_cells_in_row: u32) -> ImageResult<
     Ok(cells)
 }
 
-fn sugar(pic: &DynamicImage, number_of_cells_in_row: u32) -> ImageResult<DynamicImage> {
+pub fn sugar(pic: &DynamicImage, number_of_cells_in_row: u32) -> ImageResult<DynamicImage> {
     let mut rgb_image = pic.to_rgb8();
     let (width, height) = rgb_image.dimensions();
 
@@ -56,15 +56,6 @@ fn sugar(pic: &DynamicImage, number_of_cells_in_row: u32) -> ImageResult<Dynamic
     }
 
     Ok(DynamicImage::ImageRgb8(rgb_image))
-}
-
-pub async fn maybe_load_reference() -> Result<HashMap<i32, DynamicImage>, image::ImageError> {
-    (0..=9)
-        .map(|i| {
-            let path = format!("assets/{}.bmp", i);
-            open(&path).map(|img| (i, img))
-        })
-        .collect()
 }
 
 pub fn event_vector_difference(lha: DividedImage, rha: DividedImage) -> ImageResult<u32> {
@@ -113,9 +104,6 @@ pub fn guess_image(
     let mut results: Vec<TableRow> = (3..7)
         .flat_map(|number_of_cells_in_row| {
             let divided_main_pic = image_cutter(main_pic, number_of_cells_in_row).unwrap();
-            let pseudo_divided_main_pic = sugar(main_pic, number_of_cells_in_row).unwrap();
-            let file_name = format!("sugar/{number_of_cells_in_row}.bmp");
-            pseudo_divided_main_pic.save(file_name).unwrap();
 
             let references: Vec<&DynamicImage> = (0..=9).map(|i| &reference[&i]).collect();
 
