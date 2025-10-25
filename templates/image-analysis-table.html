@@ -1,28 +1,27 @@
 <table id="image-row">
-  <tr>
-    <td><img src="/sugar/3.bmp"></td>
-    <td><img src="/sugar/4.bmp"></td>
-    <td><img src="/sugar/5.bmp"></td>
-    <td><img src="/sugar/6.bmp"></td>
-  </tr>
+	<tr>
+		{% for img in unique_numbers %}
+		<td><img src="/session/{{ uuid }}/sugary_image/{{ img }}" alt=""></td>
+		{% endfor %}
+	</tr>
 </table>
 <table class="table">
-  <thead style="font-weight: bold; color: lightgreen">
-    <tr>
-      <th>Top</th>
-      <th>Guess</th>
-      <th>Number of cells in row</th>
-      <th>Difference(pxls)</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for row in rows %}
-    <tr>
-      <td>{{ loop.index }}</td>
-      <td>{{ row.guess }}</td>
-      <td>{{ row.cells }}</td>
-      <td>{{ row.diff }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
+	<thead style="font-weight: bold; color: lightgreen">
+		<tr>
+			<th>Top</th>
+			<th>Guess</th>
+			<th>Number of cells in row</th>
+			<th>Difference(pxls)</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for row in rows %}
+		<tr>
+			<td>{{ loop.index }}</td>
+			<td>{{ row.guess }}</td>
+			<td>{{ row.cells }}</td>
+			<td>{{ row.diff }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
 </table>
